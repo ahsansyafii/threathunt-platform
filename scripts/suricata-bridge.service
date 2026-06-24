@@ -1,0 +1,18 @@
+[Unit]
+Description=ThreatHunt - Suricata Bridge (Push to Supabase)
+After=network-online.target suricata.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/threathunt
+ExecStart=/usr/bin/python3 /opt/threathunt/suricata_bridge.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=suricata-bridge
+
+[Install]
+WantedBy=multi-user.target

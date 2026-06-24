@@ -1,0 +1,18 @@
+[Unit]
+Description=ThreatHunt - Wazuh Bridge (Push to Supabase)
+After=network-online.target wazuh-manager.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/threathunt
+ExecStart=/usr/bin/python3 /opt/threathunt/wazuh_bridge.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=wazuh-bridge
+
+[Install]
+WantedBy=multi-user.target
